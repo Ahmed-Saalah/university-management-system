@@ -1,0 +1,32 @@
+﻿@model university_management_system.Models.Student
+
+<div>
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()  
+
+        <input type="hidden" asp-for="Id" />
+
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Name)
+
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Age)
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Email)
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Password)
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Phone)
+
+        <label asp-for="EnrollmentDate"></label>
+        <input asp-for="EnrollmentDate" class="form-control" />
+        @Html.ValidationMessageFor(m => m.EnrollmentDate)
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </form>
+</div>

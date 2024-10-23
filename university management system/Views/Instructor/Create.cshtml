@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model university_management_system.Models.Instructor
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div>
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+
+        <label>Age</label>
+        <input asp-for="Age" class="form-control" />
+
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+
+        <label>Password</label>
+        <input asp-for="Password" class="form-control" />
+
+        <label>Phone</label>
+        <input asp-for="Phone" class="form-control" />
+
+        <label>Hire Date</label>
+        <input asp-for="HireDate" type="date" class="form-control" />
+
+
+        <label>Office Assignment Location</label>
+        <input asp-for="OfficeAssignment.Location" class="form-control" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<university_management_system.ViewModels.AssignedCourseData> courses = ViewBag.Courses;
+
+                            foreach (var course in courses)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                        name="selectedCourses"
+                                        value="@course.CourseID"
+                                        @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) />
+                                        @course.CourseID @:  @course.Title
+                                @:</td>
+                            }
+                            @:</tr>
+                        }
+                </table>
+            </div>
+        </div>
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </form>
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model university_management_system.Models.Instructor
+
+<div>
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="Id" />
+
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Name)
+
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Age)
+
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Phone)
+
+        <label asp-for="OfficeAssignment.Location"></label>
+        <input asp-for="OfficeAssignment.Location" class="form-control" />
+        @Html.ValidationMessageFor(m => m.OfficeAssignment.Location)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<university_management_system.ViewModels.AssignedCourseData> courses = ViewBag.Courses;
+
+                            foreach (var course in courses)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                     <input type="checkbox"
+                                        name="selectedCourses"
+                                        value="@course.CourseID"
+                                        @(Html.Raw(course.Assigned ? "checked=\"checked\"" : "")) />
+                                        @course.CourseID @:  @course.Title
+                               @:</td>
+                            }
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+            </div>
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </form>
+</div>
